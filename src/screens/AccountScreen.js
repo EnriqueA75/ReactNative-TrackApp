@@ -7,7 +7,7 @@ const AccountScreen = () => {
 
     return ( 
         <SafeAreaView>
-            <Text>Account</Text>
+            <Text style={styles.titleStl}>Account</Text>
                         
             <TouchableOpacity style={styles.btnStl} onPress={() => signout()}>
                 <Text style={styles.btnTxtStl}>Signout</Text>
@@ -29,6 +29,11 @@ const AccountScreen = () => {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#FFF',
+    },
+    titleStl: {
+        alignSelf: 'center',
+        padding: 20,
+        fontSize: 32,
     }  
  })
 export default AccountScreen;

@@ -5,6 +5,7 @@ import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import NavLink from '../components/NavLink';
+import ErrorMessage from '../components/ErrorMessage';
 
 const SigninScreen = () => {
 
@@ -42,7 +43,7 @@ const SigninScreen = () => {
                     secureTextEntry
                     autoCapitalize="none"
                 />
-                {state.errorMessage ? <View style={styles.errorBgStl}><Text style={styles.errorMessStl}>{state.errorMessage}</Text></View>  :  null}                
+                {state.errorMessage ? <ErrorMessage errorMessage={state.errorMessage}/>  :  null}                
             <Spacer>
                 <Button title="SignIn" onPress={() => signin(email, password, () => navigation.navigate('TrackTab') )}></Button>
             </Spacer>
@@ -62,20 +63,6 @@ SigninScreen.navigationOptions = () => {
   };
 
  const styles = StyleSheet.create({
-    errorMessStl: {
-        fontSize: 17,
-        color: '#FFF',
-        fontWeight: 'bold'
-    },
-    errorBgStl: {
-        backgroundColor: '#E74C3C',
-        marginHorizontal: '8%',
-        padding: 4,
-        borderLeftColor: '#922B21',
-        borderLeftWidth: 5
-    },
-    txtLinkStl: {
-        color: '#5DADE2'
-    }
+
  })
 export default SigninScreen;

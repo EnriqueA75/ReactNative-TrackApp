@@ -5,12 +5,13 @@ import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import NavLink from '../components/NavLink';
+import ErrorMessage from '../components/ErrorMessage';
 
 const SignupScreen = ( ) => {
 
     const navigation = useNavigation();
     
-    const { state, signup, clearErrorMessage } = useContext(AuthContext)
+    const { state, signup, clearErrorMessage, tryLocalSignin } = useContext(AuthContext)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -26,6 +27,10 @@ const SignupScreen = ( ) => {
             clearErrorMessage()
         }, 4000);
     }
+
+    useEffect(() => {
+        tryLocalSignin()
+    }, [])
 
     return ( 
             <SafeAreaView>
@@ -55,7 +60,7 @@ const SignupScreen = ( ) => {
                             secureTextEntry
                             autoCapitalize="none"
                         />
-                        {state.errorMessage ? <View style={styles.errorBgStl}><Text style={styles.errorMessStl}>{state.errorMessage}</Text></View>  :  null}       
+                        {state.errorMessage ? <ErrorMessage errorMessage={state.errorMessage}/> :  null}       
 
                         <Spacer>
                             <Button title="SignUp" onPress={() => signup({username, email, password})}></Button>
@@ -75,17 +80,6 @@ const SignupScreen = ( ) => {
 }
 
  const styles = StyleSheet.create({
-    errorMessStl: {
-        fontSize: 17,
-        color: '#FFF',
-        fontWeight: 'bold'
-    },
-    errorBgStl: {
-        backgroundColor: '#E74C3C',
-        marginHorizontal: '8%',
-        padding: 4,
-        borderLeftColor: '#922B21',
-        borderLeftWidth: 5
-    },
+
  })
 export default SignupScreen;
